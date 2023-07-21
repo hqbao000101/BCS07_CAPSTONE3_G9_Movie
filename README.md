@@ -6,6 +6,13 @@
   - Nguyen Dinh Anh Hao
   - Dang Thuy Linh
 
+# Các trang tối thiểu cần thực hiện
+  - Đăng nhập
+  - Đăng ký
+  - Chi tiết phim
+  - Quản lý phim (admin) --> Xem, thêm, xóa, sửa
+  - Đặt vé
+
 # Các thư mục cần tạo
   - Components
   - pages
@@ -25,6 +32,7 @@
 
 # Sources Link
   - Swagger APIs: https://movienew.cybersoft.edu.vn/swagger/index.html 
+  - Github: https://github.com/hqbao000101/BCS07_CAPSTONE3_G9_Movie.git 
   
 # Other Supports
   - animation: LottieFiles --> npm install --save react-lottie (--force)
