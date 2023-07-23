@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login";
 import AdminTemplate from "./templates/AdminTemplate";
 import LoginAdmin from "./pages/LoginAdmin/LoginAdmin";
 import UserManagement from "./pages/UserManagement/UserManagement";
+import Booking from "./pages/Booking/Booking";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         </Route>
         <Route path="/admin-login" element={<LoginAdmin />} />
         <Route path="*" element={<Page404 />} />
+        <Route path="/booking" element={<Booking />} />
       </Routes>
     </BrowserRouter>
   );
