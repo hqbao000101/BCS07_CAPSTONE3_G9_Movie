@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SeatInfo from './SeatInfo';
 import SeatRow from './SeatRow';
 import styles from "./Style-Booking.css";
-import danhSachGheData from "./Matrix-Booking.json"
+import danhSachGheData from "./danhSachGhe.json"
 
 class Booking extends Component {
   renderSeatLayout = () => {
