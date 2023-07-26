@@ -50,7 +50,7 @@ const UserManagement = () => {
         open={open}
         size="large"
       >
-        <FormAddUser />
+        <FormAddUser closeDrawer={onClose} />
       </Drawer>
     </>
   );

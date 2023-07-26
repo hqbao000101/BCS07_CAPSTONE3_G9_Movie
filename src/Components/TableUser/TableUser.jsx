@@ -9,7 +9,6 @@ import "./TableUser.scss";
 const TableUser = ({ showDrawer }) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
-  // console.log(users);
 
   const cancel = (e) => {
     message.error("Action canceled");
