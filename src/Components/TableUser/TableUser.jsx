@@ -2,7 +2,7 @@ import React from "react";
 import { Popconfirm, Space, Table, Tag, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { userServ } from "../../services/userServices";
-import { getAllUsers } from "../../redux/slices/userSlice";
+import { getAllUsers, setCurrentUser } from "../../redux/slices/userSlice";
 import "./TableUser.scss";
 
 // todo: need --> id, name, email, phone number, userType, account, action
@@ -19,7 +19,7 @@ const TableUser = ({ showDrawer }) => {
       title: "ID",
       dataIndex: "id",
       key: "id",
-      align: "center",
+      align: "center"
     },
     {
       title: "Account",
@@ -99,6 +99,7 @@ const TableUser = ({ showDrawer }) => {
           <button
             onClick={() => {
               showDrawer();
+              dispatch(setCurrentUser(record));
             }}
             className="px-5 py-2 text-white duration-500 bg-yellow-400 rounded-lg hover:bg-yellow-500"
           >

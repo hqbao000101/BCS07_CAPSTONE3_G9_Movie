@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 // import { userServ } from "../../services/userServices";
-import { useDispatch } from "react-redux";
-import { getAllUsers } from "../../redux/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers, setCurrentUser } from "../../redux/slices/userSlice";
 import TableUser from "../../Components/TableUser/TableUser";
 import { Drawer } from "antd";
 import FormAddUser from "../../Components/FormAddUser/FormAddUser";
 
 const UserManagement = () => {
+  const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
@@ -38,13 +39,16 @@ const UserManagement = () => {
     <>
       <button
         className="px-5 py-2 mb-5 text-white duration-500 bg-green-500 rounded-lg hover:bg-green-600"
-        onClick={showDrawer}
+        onClick={() => {
+          showDrawer();
+          dispatch(setCurrentUser());
+        }}
       >
         Add
       </button>
       <TableUser showDrawer={showDrawer} />
       <Drawer
-        title="Add new users"
+        title={currentUser ? "Edit the user" : "Add new users"}
         placement="right"
         onClose={onClose}
         open={open}
