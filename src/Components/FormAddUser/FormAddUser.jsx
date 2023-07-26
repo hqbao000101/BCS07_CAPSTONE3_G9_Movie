@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { getAllUsers } from "../../redux/slices/userSlice";
 import { message } from "antd";
 
-const FormAddUser = () => {
+const FormAddUser = ({ closeDrawer }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -22,6 +22,7 @@ const FormAddUser = () => {
       try {
         await userServ.addUsers({ ...values });
         message.success("Added a new user");
+        closeDrawer();
         dispatch(getAllUsers());
       } catch (error) {
         message.error(error.response.data);
@@ -35,7 +36,7 @@ const FormAddUser = () => {
     email: "admin3@gmail.com",
     soDt: "0123456789",
     maNhom: "GP01",
-    maLoaiNguoiDung: "Khách hàng",
+    maLoaiNguoiDung: "KhachHang",
     hoTen: "admin 3",
   };
 
