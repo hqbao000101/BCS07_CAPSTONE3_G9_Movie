@@ -2,12 +2,10 @@ import { useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import { userServ } from "../../services/userServices";
-import { useNavigate } from "react-router-dom";
 import { saveLocal } from "../../utils/localStore";
 import { message } from "antd";
 
 const FormLoginAdmin = () => {
-  const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
   const formik = useFormik({
@@ -24,7 +22,7 @@ const FormLoginAdmin = () => {
             messageApi.success("Login successfully");
             saveLocal("user", res.data.content);
             setTimeout(() => {
-              navigate("/admin");
+              window.location.href = "http://localhost:3000/admin";
             }, [1000]);
           } else {
             messageApi.error("You are not allowed to access this page !");
