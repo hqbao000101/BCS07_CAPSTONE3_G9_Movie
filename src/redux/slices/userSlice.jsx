@@ -13,6 +13,7 @@ export const getAllUsers = createAsyncThunk("user/getAllUsers", async () => {
 const initialState = {
   userData: getLocal("user"),
   users: [],
+  currentUser: {},
 };
 
 // ! immerjs library --> auto handle the immutation in js
@@ -26,6 +27,9 @@ export const userSlice = createSlice({
         state.userData = action.payload;
       }
     },
+    setCurrentUser: (state, action) => {
+      state.currentUser = action.payload;
+    }
   },
   // ! extraReducer giúp tách biệt các logic bất đồng bộ ra khỏi reducer vì khi xử lý bất đồng bộ có nhiều trường hợp xảy ra
   extraReducers: (builder) => {
@@ -47,6 +51,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserData } = userSlice.actions;
+export const { setUserData, setCurrentUser } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -8,3 +8,7 @@ export const getLocal = (key) => {
   let userData = JSON.parse(value) ? JSON.parse(value) : "";
   return userData;
 }
+
+export const removeLocal = (key) => {
+  localStorage.removeItem(key);
+}

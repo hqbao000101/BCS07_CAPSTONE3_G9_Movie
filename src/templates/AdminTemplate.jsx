@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme, Dropdown } from "antd";
 import { NavLink, Outlet } from "react-router-dom";
-import { getLocal } from "../utils/localStore";
+import { getLocal, removeLocal } from "../utils/localStore";
 import "./AdminTemplate.style.scss";
 
 const { Header, Sider, Content } = Layout;
@@ -40,7 +40,16 @@ const AdminTemplate = () => {
     },
     {
       icon: <LogoutOutlined />,
-      label: "Log out",
+      label: (
+        <NavLink
+          to="/admin-login"
+          onClick={() => {
+            removeLocal("user");
+          }}
+        >
+          Log out
+        </NavLink>
+      ),
       key: "3",
     },
   ];

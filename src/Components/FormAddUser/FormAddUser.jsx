@@ -1,18 +1,20 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { userServ } from "../../services/userServices";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../redux/slices/userSlice";
 import { message } from "antd";
 
 const FormAddUser = ({ closeDrawer }) => {
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const loggingUser = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       taiKhoan: "",
       matKhau: "",
       email: "",
-      soDt: "",
+      soDT: "",
       maNhom: "",
       maLoaiNguoiDung: "",
       hoTen: "",
@@ -20,30 +22,39 @@ const FormAddUser = ({ closeDrawer }) => {
 
     onSubmit: async (values) => {
       try {
-        await userServ.addUsers({ ...values });
-        message.success("Added a new user");
-        closeDrawer();
-        dispatch(getAllUsers());
+        if (!currentUser) {
+          await userServ.addUsers({ ...values });
+          message.success("Added a new user");
+          closeDrawer();
+          formik.resetForm();
+          dispatch(getAllUsers());
+        } else {
+          console.log("edit here...");
+        }
       } catch (error) {
         message.error(error.response.data);
       }
     },
   });
 
-  let userNguyen = {
-    taiKhoan: "admin3",
-    matKhau: "admin3",
-    email: "admin3@gmail.com",
-    soDt: "0123456789",
-    maNhom: "GP01",
-    maLoaiNguoiDung: "KhachHang",
-    hoTen: "admin 3",
+  const fakeInfo = {
+    taiKhoan: "",
+    matKhau: "",
+    email: "",
+    soDT: "",
+    maNhom: "",
+    maLoaiNguoiDung: "QuanTri",
+    hoTen: "",
   };
 
   useEffect(() => {
-    formik.setValues(userNguyen);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (currentUser) {
+      formik.setValues({ ...currentUser, maNhom: loggingUser.maNhom });
+    } else {
+      formik.setValues(fakeInfo);
+    }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
 
   const { handleSubmit, handleChange } = formik;
   return (
@@ -104,11 +115,11 @@ const FormAddUser = ({ closeDrawer }) => {
             <input
               onChange={handleChange}
               type="text"
-              name="soDt"
-              id="soDt"
+              name="soDT"
+              id="soDT"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
-              value={formik.values.soDt}
+              value={formik.values.soDT}
             />
             <label
               htmlFor="soDt"
@@ -143,8 +154,8 @@ const FormAddUser = ({ closeDrawer }) => {
               name="maNhom"
               id="maNhom"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder="ex: GP01, GP02,..."
               value={formik.values.maNhom}
+              placeholder=" "
             />
             <label
               htmlFor="maNhom"
@@ -165,12 +176,21 @@ const FormAddUser = ({ closeDrawer }) => {
             </select>
           </div>
         </div>
-        <button
-          type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Create
-        </button>
+        {currentUser ? (
+          <button
+            type="submit"
+            className="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:focus:ring-yellow-600"
+          >
+            Save
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Create
+          </button>
+        )}
       </form>
     </div>
   );
