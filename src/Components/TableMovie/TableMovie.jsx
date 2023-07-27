@@ -3,14 +3,31 @@ import { Popconfirm, Space, Table, message, Input } from "antd";
 import { movieServ } from "../../services/movieServices";
 import "./TableMovie.scss";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-
-const { Search } = Input;
-
-const onSearch = (value) => console.log(value);
+import removeAccents from "../../utils/formatWord";
 
 const TableMovie = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [movie, setMovie] = useState([]);
+  const [initialList, setInitialList] = useState([]);
+
+  const { Search } = Input;
+  const onSearch = (value) => {
+    if (value === "") {
+      setMovie(initialList);
+    } else {
+      let formattedValue = removeAccents(value);
+      let searchMovies = initialList.filter((item) => {
+        let formattedName = removeAccents(item.tenPhim);
+        return formattedName.includes(formattedValue);
+      });
+      setMovie(searchMovies);
+    }
+  };
+  const onChange = (e) => {
+    if (e.target.value === "") {
+      setMovie(initialList);
+    };
+  }
 
   const handleChange = (pagination, filters, sorter) => {
     setSortedInfo(sorter);
@@ -58,7 +75,9 @@ const TableMovie = () => {
       title: "Description",
       dataIndex: "moTa",
       key: "moTa",
-      render: (text) => <p className="whitespace-normal line-clamp-5">{text}</p>,
+      render: (text) => (
+        <p className="whitespace-normal line-clamp-5">{text}</p>
+      ),
       ellipsis: true,
     },
     {
@@ -88,12 +107,13 @@ const TableMovie = () => {
   const getAllMovies = async () => {
     const movies = await movieServ.getAllMovies();
     setMovie(movies.data.content);
+    setInitialList(movies.data.content);
   };
 
   useEffect(() => {
     getAllMovies();
   }, []);
-  console.log(movie);
+
   return (
     <>
       <Space
@@ -107,12 +127,13 @@ const TableMovie = () => {
       </Space>
       <Search
         id="movie__search"
-        placeholder="Input search text"
+        placeholder="Input search movies..."
         allowClear
         enterButton="Search"
         size="large"
         onSearch={onSearch}
         className="mb-3"
+        onChange={onChange}
       />
       <Table
         id="movie__table"
