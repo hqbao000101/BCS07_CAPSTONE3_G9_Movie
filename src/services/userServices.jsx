@@ -15,4 +15,7 @@ export const userServ = {
   addUsers: (data) => {
     return https.post("/api/QuanLyNguoiDung/ThemNguoiDung", data);
   },
+  updateUsers: (data) => {
+    return https.post("/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung", data);
+  }
 };
