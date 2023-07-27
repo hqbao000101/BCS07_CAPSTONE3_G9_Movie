@@ -9,7 +9,7 @@ import {
   // UserOutlined,
   // VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, theme, Dropdown } from "antd";
+import { Layout, Menu, Button, theme, Dropdown, Divider } from "antd";
 import { NavLink, Outlet } from "react-router-dom";
 import { getLocal, removeLocal } from "../utils/localStore";
 import "./AdminTemplate.style.scss";
@@ -80,7 +80,19 @@ const AdminTemplate = () => {
   return (
     <Layout className="min-h-screen">
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
+        <div
+          className={`flex items-center my-3 demo-logo-vertical ${
+            collapsed ? "" : "ms-3"
+          }`}
+        >
+          <img
+            src="./imgs/favicon.png"
+            alt=""
+            className={collapsed ? "w-full px-4" : "w-1/3"}
+          />
+          {collapsed ? <></> : <h1 className="text-2xl text-white">Movie</h1>}
+        </div>
+        <Divider className="mt-0 mb-4 bg-white bg-opacity-70"/>
         <Menu
           theme="dark"
           mode="inline"
@@ -89,7 +101,7 @@ const AdminTemplate = () => {
             {
               key: "1",
               icon: <i className="fa-solid fa-house-chimney-user"></i>,
-              label: <NavLink to="/admin/user">User</NavLink>,
+              label: <NavLink to="/admin">User</NavLink>,
             },
             {
               key: "2",
