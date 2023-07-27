@@ -7,6 +7,7 @@ import AdminTemplate from "./templates/AdminTemplate";
 import LoginAdmin from "./pages/LoginAdmin/LoginAdmin";
 import UserManagement from "./pages/UserManagement/UserManagement";
 import Booking from "./pages/Booking/Booking";
+import MovieManagement from "./pages/MovieManagement/MovieManagement";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/admin" element={<AdminTemplate />}>
           {/* <Route path="user" element={<UserManagement />} /> */}
           <Route index element={<UserManagement />} />
+          <Route path="/admin/movie" element={<MovieManagement />} />
         </Route>
         <Route path="/admin-login" element={<LoginAdmin />} />
         <Route path="*" element={<Page404 />} />
