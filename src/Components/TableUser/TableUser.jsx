@@ -76,11 +76,11 @@ const TableUser = ({ showDrawer }) => {
               userServ
                 .deleteUsers(record.taiKhoan)
                 .then(() => {
-                  message.success("Successfully Delete");
+                  message.success("Successfully Deleted");
                   dispatch(getAllUsers());
                 })
-                .catch(() => {
-                  message.error("Something is wrong");
+                .catch((err) => {
+                  message.error(err.response.data.content);
                 });
             }}
             onCancel={cancel}
@@ -92,7 +92,7 @@ const TableUser = ({ showDrawer }) => {
               className="px-5 py-2 text-white duration-500 bg-red-500 rounded-lg hover:bg-red-600"
               // ! sẽ sửa lại thêm một popconfirm vào để hỏi người dùng có muốn xóa hay không và thêm thông báo khi xóa thành công cũng như thất bại
             >
-              Del
+              Delete
             </button>
           </Popconfirm>
 
