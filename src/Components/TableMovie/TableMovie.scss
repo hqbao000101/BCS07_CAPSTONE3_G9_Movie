@@ -1,0 +1,24 @@
+:where(.css-dev-only-do-not-override-14wwjjs).ant-input-search
+  .ant-input-group
+  .ant-input-group-addon:last-child,
+:where(.css-14wwjjs).ant-input-search
+  .ant-input-group
+  .ant-input-group-addon:last-child {
+  background: #1e90ff;
+}
+
+:where(.css-dev-only-do-not-override-14wwjjs).ant-table-wrapper
+  #movie__table
+  .ant-table-thead
+  > tr
+  > th,
+:where(.css-dev-only-do-not-override-14wwjjs).ant-table-wrapper
+  #movie__table
+  .ant-table-thead
+  > tr
+  > td,
+:where(.css-14wwjjs).ant-table-wrapper #movie__table .ant-table-thead > tr > th,
+:where(.css-14wwjjs).ant-table-wrapper #movie__table .ant-table-thead > tr > td {
+  background: #1e90ff;
+  color: white;
+}

@@ -117,6 +117,7 @@ const TableUser = ({ showDrawer }) => {
   // ! When using the Table component of antd, it should have the "rowKey" attribute which will receive the key name of columns
   return (
     <Table
+      id="user__table"
       columns={columns}
       dataSource={newUsers}
       rowKey="id"
