@@ -7,4 +7,13 @@ export const movieServ = {
   getAllMovies: () => {
     return https.get("/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP09");
   },
+  addMovies: (data) => {
+    return https.post("/api/QuanLyPhim/ThemPhimUploadHinh", data);
+  },
+  deleteMovies: (maPhim) => {
+    return https.delete(`/api/QuanLyPhim/XoaPhim/${maPhim}`);
+  },
+  updateMovies: (data) => {
+    return https.post("/api/QuanLyPhim/CapNhatPhimUpload", data);
+  }
 }
