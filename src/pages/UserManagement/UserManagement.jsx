@@ -37,14 +37,18 @@ const UserManagement = () => {
   // ! redux-sage
   return (
     <>
+      <h1 className="mb-10 text-3xl font-medium uppercase">
+        <span className="text-blue-500">User </span>
+        Management
+      </h1>
       <button
-        className="px-5 py-2 mb-5 text-white duration-500 bg-green-500 rounded-lg hover:bg-green-600"
+        className="px-5 py-2 mb-3 text-white duration-500 bg-green-500 rounded-lg hover:bg-green-600"
         onClick={() => {
           showDrawer();
           dispatch(setCurrentUser());
         }}
       >
-        Add
+        Add new users
       </button>
       <TableUser showDrawer={showDrawer} />
       <Drawer
