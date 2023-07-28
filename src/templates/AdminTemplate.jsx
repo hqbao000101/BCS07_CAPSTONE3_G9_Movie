@@ -113,7 +113,19 @@ const AdminTemplate = () => {
 
   return (
     <Layout className="min-h-screen">
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        style={{
+          overflow: "auto",
+          height: "100vh",
+          position: "sticky",
+          left: 0,
+          top: 0,
+          bottom: 0,
+        }}
+      >
         <div
           className={`flex items-center my-3 demo-logo-vertical ${
             collapsed ? "" : "ms-3"

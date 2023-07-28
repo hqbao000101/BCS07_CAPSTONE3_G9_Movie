@@ -1,11 +1,66 @@
-import React from "react";
-import { DatePicker, Form, Input, InputNumber, Switch } from "antd";
+import React, { useState } from "react";
+import { DatePicker, Form, Input, InputNumber, Switch, message } from "antd";
+import { useFormik } from "formik";
+import {
+  FolderViewOutlined,
+  EllipsisOutlined,
+  CaretRightOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
+import * as yup from "yup";
 
 const FormAddMovie = () => {
+  const [img, setImg] = useState("");
+  const formik = useFormik({
+    initialValues: {
+      tenPhim: "",
+      trailer: "",
+      moTa: "",
+      ngayKhoiChieu: "",
+      sapChieu: false,
+      dangChieu: false,
+      hot: false,
+      danhGia: 5,
+      hinhAnh: {},
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      message.info("Creating the movie...")
+    },
+    validationSchema: yup.object({
+      tenPhim: yup.string().required("This field is required"),
+      trailer: yup.string().required("This field is required"),
+      moTa: yup.string().required("This field is required"),
+    }),
+  });
+
+  const handleChangeDatePicker = (value) => {
+    let ngayKhoiChieu = value.format("DD/MM/YYYY");
+    formik.setFieldValue("ngayKhoiChieu", ngayKhoiChieu);
+  };
+
+  const handleChangeSwitch = (name) => {
+    return (value) => {
+      formik.setFieldValue(name, value);
+    };
+  };
+
+  const handleChangeFile = (e) => {
+    let file = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (e) => {
+      setImg(e.target.result);
+    };
+    formik.setFieldValue("hinhAnh", file);
+  };
+
+  const { handleSubmit, handleChange, values, handleBlur } = formik;
+
   return (
     <Form
       labelCol={{
-        span: 4,
+        span: 5,
       }}
       wrapperCol={{
         span: 14,
@@ -16,49 +71,115 @@ const FormAddMovie = () => {
         maxWidth: 600,
         margin: "auto",
       }}
+      onSubmitCapture={handleSubmit}
     >
       <Form.Item label="Movie Name">
-        <Input name="tenPhim" />
+        <Input
+          onChange={handleChange}
+          value={values.tenPhim}
+          name="tenPhim"
+          status={
+            formik.errors.tenPhim && formik.touched.tenPhim ? "error" : ""
+          }
+          onBlur={handleBlur}
+        />
+        {formik.errors.tenPhim && formik.touched.tenPhim ? (
+          <p className="mt-2 text-sm italic text-red-500">
+            {formik.errors.tenPhim}
+          </p>
+        ) : (
+          ""
+        )}
       </Form.Item>
       <Form.Item label="Trailer">
-        <Input name="trailer" />
+        <Input
+          onChange={handleChange}
+          value={values.trailer}
+          name="trailer"
+          status={
+            formik.errors.trailer && formik.touched.trailer ? "error" : ""
+          }
+          onBlur={handleBlur}
+        />
+        {formik.errors.trailer && formik.touched.trailer ? (
+          <p className="mt-2 text-sm italic text-red-500">
+            {formik.errors.trailer}
+          </p>
+        ) : (
+          ""
+        )}
       </Form.Item>
       <Form.Item label="Description">
-        <Input name="moTa" />
+        <Input
+          onChange={handleChange}
+          value={values.moTa}
+          name="moTa"
+          status={formik.errors.moTa && formik.touched.moTa ? "error" : ""}
+          onBlur={handleBlur}
+        />
+        {formik.errors.moTa && formik.touched.moTa ? (
+          <p className="mt-2 text-sm italic text-red-500">
+            {formik.errors.moTa}
+          </p>
+        ) : (
+          ""
+        )}
       </Form.Item>
       <Form.Item label="Premiere">
-        <DatePicker />
+        <DatePicker onChange={handleChangeDatePicker} />
       </Form.Item>
-      <Form.Item label="Now Showing">
-        <Switch />
+      <Form.Item label="Showing Now">
+        <Switch onChange={handleChangeSwitch("dangChieu")} />
       </Form.Item>
       <Form.Item label="Coming Soon">
-        <Switch />
+        <Switch onChange={handleChangeSwitch("sapChieu")} />
       </Form.Item>
       <Form.Item label="Hot">
-        <Switch />
+        <Switch onChange={handleChangeSwitch("hot")} />
       </Form.Item>
       <Form.Item label="Rating">
-        <InputNumber min="0" max="5" />
+        <InputNumber
+          min="0"
+          max="10"
+          onChange={(value) => {
+            formik.setFieldValue("danhGia", value);
+          }}
+          value={formik.values.danhGia}
+        />
+        <p className="mt-2 text-sm italic text-gray-400">
+          * Rating should be between 0 and 10
+        </p>
       </Form.Item>
       <Form.Item label="Image">
-        <input type="file" name="hinhAnh" />
+        <input
+          id="inputFile"
+          type="file"
+          name="hinhAnh"
+          accept="image/png, image/jpeg, image/jpg"
+          onChange={handleChangeFile}
+          style={{ display: "none" }}
+        />
+        <label
+          htmlFor="inputFile"
+          className="flex justify-center items-center cursor-pointer p-2 border rounded-lg  hover:border-blue-500 duration-500 hover:text-blue-500 w-[50%]"
+        >
+          <UploadOutlined />
+          <span className="ml-2">Click to Upload</span>
+        </label>
       </Form.Item>
-      <Form.Item
-        label={
-          <button
-            type="button"
-            className="px-5 py-2 text-white duration-500 bg-red-400 rounded-md hover:bg-red-500"
-            onClick={() => {
-              console.log("Reset form...");
-            }}
-          >
-            Reset
-          </button>
-        }
-        colon={false}
-        className="mt-8"
-      >
+      <Form.Item label={<FolderViewOutlined />}>
+        {img ? (
+          <img
+            src={img}
+            alt="Movie Banner"
+            className="object-cover"
+            style={{ width: "400px", height: "300px" }}
+          />
+        ) : (
+          <EllipsisOutlined />
+        )}
+      </Form.Item>
+      <Form.Item label={<CaretRightOutlined />} colon={false} className="mt-8">
         <button
           type="submit"
           className="px-5 py-2 mb-3 text-white duration-500 bg-[#70a1ff] rounded-lg hover:bg-[#1e90ff]"

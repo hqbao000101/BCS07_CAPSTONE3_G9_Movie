@@ -19,14 +19,13 @@ const AddMovie = () => {
         <span className="text-blue-500">Add </span>
         New Movies
       </h1>
-      <div className="flex items-center">
-      <div className="w-1/2">
-          <Lottie options={defaultOptions} height={500} width={500} />
+      <div className="flex items-start flex-col lg:flex-row">
+        <div className="lg:w-1/2 w-full">
+          <Lottie options={defaultOptions} height={"80%"} width={"80%"} />
         </div>
-        <div className="w-1/2">
+        <div className="lg:w-1/2 w-full">
           <FormAddMovie />
         </div>
-        
       </div>
     </div>
   );
