@@ -5,9 +5,6 @@ import {
   MenuUnfoldOutlined,
   SettingOutlined,
   UserOutlined,
-  // UploadOutlined,
-  // UserOutlined,
-  // VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme, Dropdown, Divider } from "antd";
 import { NavLink, Outlet } from "react-router-dom";
@@ -15,6 +12,43 @@ import { getLocal, removeLocal } from "../utils/localStore";
 import "./AdminTemplate.style.scss";
 
 const { Header, Sider, Content } = Layout;
+
+function getItem(label, key, icon, children, type) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  };
+}
+
+const menuItems = [
+  getItem(
+    <NavLink to="/admin">User</NavLink>,
+    "1",
+    <i className="fa-solid fa-house-chimney-user"></i>,
+    null
+  ),
+  getItem("Movie", "2", <i className="fa-solid fa-ticket"></i>, [
+    getItem(
+      <NavLink to="/admin/movie">Movie List</NavLink>,
+      "2.1",
+      <i className="fa-solid fa-list"></i>
+    ),
+    getItem(
+      <NavLink to="/admin/movie/add">Add Movie</NavLink>,
+      "2.2",
+      <i className="fa-regular fa-calendar-plus"></i>
+    ),
+  ]),
+  getItem(
+    <NavLink to="/admin/show-time">Show Time</NavLink>,
+    "3",
+    <i className="fa-solid fa-masks-theater"></i>,
+    null
+  ),
+];
 
 const AdminTemplate = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -86,34 +120,18 @@ const AdminTemplate = () => {
           }`}
         >
           <img
-            src="./imgs/favicon.png"
-            alt=""
+            src="../imgs/favicon.png"
+            alt="Logo"
             className={collapsed ? "w-full px-4" : "w-1/3"}
           />
           {collapsed ? <></> : <h1 className="text-2xl text-white">Movie</h1>}
         </div>
-        <Divider className="mt-0 mb-4 bg-white bg-opacity-70"/>
+        <Divider className="mt-0 mb-4 bg-white bg-opacity-70" />
         <Menu
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <i className="fa-solid fa-house-chimney-user"></i>,
-              label: <NavLink to="/admin">User</NavLink>,
-            },
-            {
-              key: "2",
-              icon: <i className="fa-solid fa-ticket"></i>,
-              label: <NavLink to="/admin/movie">Movie</NavLink>,
-            },
-            {
-              key: "3",
-              icon: <i className="fa-solid fa-masks-theater"></i>,
-              label: <NavLink to="/admin/show-time">Show Time</NavLink>,
-            },
-          ]}
+          items={menuItems}
         />
       </Sider>
       <Layout>
