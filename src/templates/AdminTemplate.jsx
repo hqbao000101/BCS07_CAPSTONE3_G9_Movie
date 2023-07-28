@@ -11,7 +11,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { getLocal, removeLocal } from "../utils/localStore";
 import "./AdminTemplate.style.scss";
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer } = Layout;
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -178,6 +178,13 @@ const AdminTemplate = () => {
         >
           <Outlet />
         </Content>
+        <Footer
+          style={{ textAlign: "right" }}
+          className="p-6 font-bold uppercase bg-white"
+        >
+          <span className="text-[#1e90ff]">Cybersoft Movie Project</span> ©2023
+          Created by <span>G9 | BCS07</span>
+        </Footer>
       </Layout>
     </Layout>
   );
