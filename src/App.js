@@ -9,6 +9,7 @@ import UserManagement from "./pages/UserManagement/UserManagement";
 import Booking from "./pages/Booking/Booking";
 import MovieManagement from "./pages/MovieManagement/MovieManagement";
 import AddMovie from "./Components/AddMovie/AddMovie";
+import ShowTime from "./Components/ShowTime/ShowTime";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route index element={<UserManagement />} />
           <Route path="/admin/movie" element={<MovieManagement />} />
           <Route path="/admin/movie/add" element={<AddMovie />} />
+          <Route path="/admin/show-time" element={<ShowTime />} />
         </Route>
         <Route path="/admin-login" element={<LoginAdmin />} />
         <Route path="*" element={<Page404 />} />
