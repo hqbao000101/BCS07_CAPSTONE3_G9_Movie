@@ -4,11 +4,13 @@ import { movieServ } from "../../services/movieServices";
 import "./TableMovie.scss";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import removeAccents from "../../utils/formatWord";
+import { useNavigate } from "react-router-dom";
 
 const TableMovie = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [movie, setMovie] = useState([]);
   const [initialList, setInitialList] = useState([]);
+  const navigate = useNavigate();
 
   const { Search } = Input;
   const onSearch = (value) => {
@@ -26,8 +28,8 @@ const TableMovie = () => {
   const onChange = (e) => {
     if (e.target.value === "") {
       setMovie(initialList);
-    };
-  }
+    }
+  };
 
   const handleChange = (pagination, filters, sorter) => {
     setSortedInfo(sorter);
@@ -121,9 +123,11 @@ const TableMovie = () => {
           marginBottom: 16,
         }}
       >
-        <button className="px-5 py-2 mb-3 text-white duration-500 bg-green-500 rounded-lg hover:bg-green-600">
-          Add movies
-        </button>
+          <button className="px-5 py-2 mb-3 text-white duration-500 bg-green-500 rounded-lg hover:bg-green-600" onClick={() => {
+            navigate("/admin/movie/add")
+          }}>
+            Add movies
+          </button>
       </Space>
       <Search
         id="movie__search"
