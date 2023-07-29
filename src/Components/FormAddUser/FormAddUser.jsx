@@ -15,8 +15,8 @@ const FormAddUser = ({ closeDrawer }) => {
       matKhau: "",
       email: "",
       soDT: "",
-      maNhom: "",
-      maLoaiNguoiDung: "",
+      maNhom: "GP01",
+      maLoaiNguoiDung: "QuanTri",
       hoTen: "",
     },
 
