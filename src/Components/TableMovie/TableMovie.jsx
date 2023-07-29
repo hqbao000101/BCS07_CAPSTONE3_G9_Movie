@@ -5,38 +5,41 @@ import "./TableMovie.scss";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import removeAccents from "../../utils/formatWord";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllMovies, setMovies } from "../../redux/slices/movieSlice";
 
 const TableMovie = () => {
   const [sortedInfo, setSortedInfo] = useState({});
-  const [movie, setMovie] = useState([]);
   const [initialList, setInitialList] = useState([]);
   const navigate = useNavigate();
-
+  const allMovies = useSelector((state) => state.movie.movies);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    setInitialList(allMovies);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  
   const { Search } = Input;
   const onSearch = (value) => {
-    if (value === "") {
-      setMovie(initialList);
-    } else {
+    if (value !== "") {
       let formattedValue = removeAccents(value);
       let searchMovies = initialList.filter((item) => {
         let formattedName = removeAccents(item.tenPhim);
         return formattedName.includes(formattedValue);
       });
-      setMovie(searchMovies);
+      dispatch(setMovies(searchMovies));
     }
   };
+  
   const onChange = (e) => {
     if (e.target.value === "") {
-      setMovie(initialList);
+      dispatch(setMovies(initialList));
     }
   };
 
   const handleChange = (pagination, filters, sorter) => {
     setSortedInfo(sorter);
-  };
-
-  const confirm = (e) => {
-    message.success("Action confirmed");
   };
 
   const cancel = (e) => {
@@ -91,9 +94,17 @@ const TableMovie = () => {
         <Space size="small">
           <EditOutlined className="mr-4 text-2xl text-blue-400 duration-500 cursor-pointer hover:text-blue-600" />
           <Popconfirm
-            title="Delete Users"
-            description="Are you sure to delete this user?"
-            onConfirm={confirm}
+            title="Delete Movie"
+            description="Are you sure to delete this movie?"
+            onConfirm={async () => {
+              try {
+                await movieServ.deleteMovies(record.maPhim);
+                message.success("Deleted successfully");
+                dispatch(getAllMovies());
+              } catch (err) {
+                message.error(err.response.data.content);
+              }
+            }}
             onCancel={cancel}
             okText="Yes"
             cancelText="No"
@@ -106,15 +117,15 @@ const TableMovie = () => {
     },
   ];
 
-  const getAllMovies = async () => {
-    const movies = await movieServ.getAllMovies();
-    setMovie(movies.data.content);
-    setInitialList(movies.data.content);
-  };
+  // const getAllMovies = async () => {
+  //   const movies = await movieServ.getAllMovies();
+  //   setMovie(movies.data.content);
+  //   setInitialList(movies.data.content);
+  // };
 
-  useEffect(() => {
-    getAllMovies();
-  }, []);
+  // useEffect(() => {
+  //   getAllMovies();
+  // }, []);
 
   return (
     <>
@@ -123,11 +134,14 @@ const TableMovie = () => {
           marginBottom: 16,
         }}
       >
-          <button className="px-5 py-2 mb-3 text-white duration-500 bg-green-500 rounded-lg hover:bg-green-600" onClick={() => {
-            navigate("/admin/movie/add")
-          }}>
-            Add movies
-          </button>
+        <button
+          className="px-5 py-2 mb-3 text-white duration-500 bg-green-500 rounded-lg hover:bg-green-600"
+          onClick={() => {
+            navigate("/admin/movie/add");
+          }}
+        >
+          Add movies
+        </button>
       </Space>
       <Search
         id="movie__search"
@@ -143,7 +157,7 @@ const TableMovie = () => {
         id="movie__table"
         rowKey="maPhim"
         columns={columns}
-        dataSource={movie}
+        dataSource={allMovies}
         onChange={handleChange}
         scroll={{ x: 1150 }}
       />
