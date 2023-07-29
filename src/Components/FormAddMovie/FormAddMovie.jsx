@@ -8,9 +8,13 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 import * as yup from "yup";
+import { movieServ } from "../../services/movieServices";
+import { useNavigate } from "react-router-dom";
 
 const FormAddMovie = () => {
   const [img, setImg] = useState("");
+  const navigate = useNavigate();
+  const [add, setAdd] = useState(false);
   const formik = useFormik({
     initialValues: {
       tenPhim: "",
@@ -23,9 +27,22 @@ const FormAddMovie = () => {
       danhGia: 5,
       hinhAnh: {},
     },
-    onSubmit: (values) => {
-      console.log(values);
-      message.info("Creating the movie...")
+    onSubmit: async (values) => {
+      setAdd(true);
+      try {
+        let formData = new FormData();
+        for (let key in values) {
+          formData.append(key, values[key]);
+        }
+        await movieServ.addMovies(formData);
+        message.success("Added a new movie");
+        setAdd(false);
+        setTimeout(() => {
+          navigate("/admin/movie");
+        }, [2000]);
+      } catch (error) {
+        message.error(error.response.data);
+      }
     },
     validationSchema: yup.object({
       tenPhim: yup.string().required("This field is required"),
@@ -182,7 +199,8 @@ const FormAddMovie = () => {
       <Form.Item label={<CaretRightOutlined />} colon={false} className="mt-8">
         <button
           type="submit"
-          className="px-5 py-2 mb-3 text-white duration-500 bg-[#70a1ff] rounded-lg hover:bg-[#1e90ff]"
+          className="px-5 py-2 mb-3 text-white duration-500 bg-[#70a1ff] rounded-lg hover:bg-[#1e90ff] disabled:bg-gray-400 disabled:cursor-not-allowed"
+          disabled={add ? true : false}
         >
           Create
         </button>
