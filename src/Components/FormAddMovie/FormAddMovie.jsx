@@ -36,12 +36,13 @@ const FormAddMovie = () => {
         }
         await movieServ.addMovies(formData);
         message.success("Added a new movie");
-        setAdd(false);
         setTimeout(() => {
           navigate("/admin/movie");
+          setAdd(false);
         }, [2000]);
       } catch (error) {
         message.error(error.response.data);
+        setAdd(false);
       }
     },
     validationSchema: yup.object({
