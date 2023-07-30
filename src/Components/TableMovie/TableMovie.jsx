@@ -6,7 +6,11 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import removeAccents from "../../utils/formatWord";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMovies, setMovies } from "../../redux/slices/movieSlice";
+import {
+  getAllMovies,
+  setMovies,
+  setSelectedMovie,
+} from "../../redux/slices/movieSlice";
 
 const TableMovie = () => {
   const [sortedInfo, setSortedInfo] = useState({});
@@ -14,14 +18,15 @@ const TableMovie = () => {
   const navigate = useNavigate();
   const allMovies = useSelector((state) => state.movie.movies);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
-    setInitialList(allMovies);
+    dispatch(getAllMovies());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  
+  }, []);
+
   const { Search } = Input;
   const onSearch = (value) => {
+    setInitialList(allMovies);
     if (value !== "") {
       let formattedValue = removeAccents(value);
       let searchMovies = initialList.filter((item) => {
@@ -31,7 +36,7 @@ const TableMovie = () => {
       dispatch(setMovies(searchMovies));
     }
   };
-  
+
   const onChange = (e) => {
     if (e.target.value === "") {
       dispatch(setMovies(initialList));
@@ -92,7 +97,16 @@ const TableMovie = () => {
       ellipsis: true,
       render: (_, record) => (
         <Space size="small">
-          <EditOutlined className="mr-4 text-2xl text-blue-400 duration-500 cursor-pointer hover:text-blue-600" />
+          <EditOutlined
+            className="mr-4 text-2xl text-blue-400 duration-500 cursor-pointer hover:text-blue-600"
+            onClick={async () => {
+              try {
+                const details = await movieServ.getMovieDetails(record.maPhim);
+                dispatch(setSelectedMovie(details.data.content));
+                navigate(`/admin/movie/edit/${record.maPhim}`);
+              } catch (err) {}
+            }}
+          />
           <Popconfirm
             title="Delete Movie"
             description="Are you sure to delete this movie?"
@@ -116,16 +130,6 @@ const TableMovie = () => {
       ),
     },
   ];
-
-  // const getAllMovies = async () => {
-  //   const movies = await movieServ.getAllMovies();
-  //   setMovie(movies.data.content);
-  //   setInitialList(movies.data.content);
-  // };
-
-  // useEffect(() => {
-  //   getAllMovies();
-  // }, []);
 
   return (
     <>
