@@ -62,7 +62,8 @@ const Header = () => {
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <NavLink to="/" className="flex items-center">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            // src="https://flowbite.com/docs/images/logo.svg"
+            src="../imgs/favicon.png"
             className="h-8 mr-3"
             alt="Flowbite Logo"
           />
