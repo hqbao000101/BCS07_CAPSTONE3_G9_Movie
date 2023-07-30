@@ -57,7 +57,7 @@ const Header = () => {
   // }, [hoTen]);
 
   return (
-    <nav className="top-0 left-0 z-20 w-full bg-white border-b border-gray-200 border-none shadow-lg dark:bg-gray-900 shadow-stone-500/50">
+    <nav className="top-0 left-0 z-20 w-full bg-white border-b border-gray-200 border-none shadow-md dark:bg-gray-900 shadow-stone-500/50">
       {/* {hoTen ? contextHolder : ""} */}
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <NavLink to="/" className="flex items-center">

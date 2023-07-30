@@ -1,9 +1,12 @@
-import { Input } from "antd";
+import { Input, message } from "antd";
 import { useFormik } from "formik";
 import React from "react";
 import * as yup from "yup";
+import { userServ } from "../../services/userServices";
+import { useNavigate } from "react-router-dom";
 
 const FormRegister = () => {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       hoTen: "",
@@ -14,8 +17,16 @@ const FormRegister = () => {
       email: "",
       soDt: "",
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        await userServ.register(values);
+        message.success("Registered successfully");
+        setTimeout(() => {
+          navigate("/login");
+        }, [2000]);
+      } catch (err) {
+        message.error(err.response.data.content);
+      }
     },
     validationSchema: yup.object({
       hoTen: yup.string().required("This field is required"),
