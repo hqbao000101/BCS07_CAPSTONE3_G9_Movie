@@ -14,11 +14,11 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center gap-4 px-48">
-      <div className="w-1/2">
+    <div className="flex items-center gap-4 lg:px-48 flex-col lg:flex-row px-24">
+      <div className="lg:w-1/2 hidden lg:block">
         <Lottie options={defaultOptions} width={"100%"} />
       </div>
-      <div className="w-1/2 px-24">
+      <div className="lg:w-1/2 lg:px-24 w-full px-4">
         <FormLogin />
       </div>
     </div>
