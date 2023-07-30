@@ -56,7 +56,7 @@ const FormRegister = () => {
         Account
       </h1>
       <form onSubmit={formik.handleSubmit}>
-        <div className="grid grid-cols-2 grid-rows-3 gap-6 mb-10">
+        <div className="grid md:grid-cols-2 md:grid-rows-3 gap-6 mb-10 grid-cols-1 grid-rows-6">
           <div>
             <label
               htmlFor="hoTen"
