@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+<<<<<<< HEAD
+=======
+import './Style-Booking.css';
+>>>>>>> 61c3578 (fix everything, finish exercise)
 
 class SeatRow extends Component {
   renderGhe = () => {
@@ -53,7 +57,11 @@ class SeatRow extends Component {
 
 const mapStateToProps = (state) => {
   return {
+<<<<<<< HEAD
     danhSachGheDangDat: state.ThongTinDatVeReducer.danhSachGheDangDat
+=======
+    danhSachGheDangDat: state.ThongTinDatVeReducer.danhSachGheDangDat || []
+>>>>>>> 61c3578 (fix everything, finish exercise)
   }
 }
 

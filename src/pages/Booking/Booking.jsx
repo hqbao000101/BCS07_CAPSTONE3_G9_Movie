@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import SeatInfo from './SeatInfo';
 import SeatRow from './SeatRow';
+<<<<<<< HEAD
 import styles from "./Style-Booking.css";
+=======
+import styles from './Style-Booking.css';
+>>>>>>> 61c3578 (fix everything, finish exercise)
 import danhSachGheData from "./danhSachGhe.json"
 
 class Booking extends Component {
@@ -21,8 +25,13 @@ class Booking extends Component {
               <div className="container-fluid">
                   <div className="row">
                       <div className="col-8 text-center ">
+<<<<<<< HEAD
                           <span class="emoji">🎟</span><h3 className='mt-3 h1'> MOVIE SEAT SELECTION 🍿</h3>
                           <p>Please select your preferred seats. Be aware that prices may vary depending on the location of the seats within the theater.</p>
+=======
+                          <h3 className='mt-3 h1'> MOVIE SEAT SELECTION 🍿</h3>
+                          <p>Please select your preferred seats. Prices may vary depending on the location of the seats within the theater.</p>
+>>>>>>> 61c3578 (fix everything, finish exercise)
                           <br/>
                           <br/>
                           <h5 className='pt-0'>SCREEN LOCATED HERE.</h5>
