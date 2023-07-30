@@ -4,6 +4,9 @@ export const userServ = {
   login: (data) => {
     return https.post("/api/QuanLyNguoiDung/DangNhap", data);
   },
+  register: (data) => {
+    return https.post("/api/QuanLyNguoiDung/DangKy", data);
+  },
   getAllUsers: () => {
     return https.get('/api/QuanLyNguoiDung/LayDanhSachNguoiDung');
   },

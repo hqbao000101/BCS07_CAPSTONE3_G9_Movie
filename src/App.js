@@ -11,6 +11,7 @@ import MovieManagement from "./pages/MovieManagement/MovieManagement";
 import AddMovie from "./Components/AddMovie/AddMovie";
 import ShowTime from "./Components/ShowTime/ShowTime";
 import EditMovie from "./Components/EditMovie/EditMovie";
+import Register from "./pages/Register/Register";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<UserTemplate />}>
           <Route index element={<HomePage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route>
         <Route path="/admin" element={<AdminTemplate />}>
           {/* <Route path="user" element={<UserManagement />} /> */}
