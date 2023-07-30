@@ -29,10 +29,13 @@ const FormAddUser = ({ closeDrawer }) => {
           formik.resetForm();
           dispatch(getAllUsers());
         } else {
-          console.log("edit here...");
+          await userServ.updateUsers(values);
+          message.success("Updated the user");
+          closeDrawer();
+          dispatch(getAllUsers());
         }
       } catch (error) {
-        message.error(error.response.data);
+        message.error(error.response.data.content);
       }
     },
   });
