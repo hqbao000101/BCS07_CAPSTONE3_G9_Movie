@@ -1,11 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./slices/userSlice";
 import loadingSlice from "./slices/loadingSlice";
-<<<<<<< HEAD
-import ThongTinDateVeReducer from "./reducer/ThongTinDatVeReducer"
-=======
 import ThongTinDatVeReducer from "./reducer/ThongTinDatVeReducer"
->>>>>>> 61c3578 (fix everything, finish exercise)
 
 export const store = configureStore({
   reducer: {
@@ -17,9 +13,6 @@ export const store = configureStore({
     },
     user: userSlice,
     loading: loadingSlice,
-<<<<<<< HEAD
-=======
     ThongTinDatVeReducer: ThongTinDatVeReducer
->>>>>>> 61c3578 (fix everything, finish exercise)
   },
 });

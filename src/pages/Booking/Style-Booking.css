@@ -17,17 +17,10 @@
   margin-left: 2%;
   margin-bottom: 1%;
   font-size: 30px;
-<<<<<<< HEAD
-  color: yellow;
-}
-.firstChar {
-  color: yellow;
-=======
   color: darkblue;
 }
 .firstChar {
   color: darkblue;
->>>>>>> 61c3578 (fix everything, finish exercise)
   font-size: 35px;
   margin-right: 15px;
 }
@@ -155,8 +148,6 @@ input[type="checkbox"]:checked:before {
   font-size: 17px;
   font-weight: 700px;
 }
-<<<<<<< HEAD
-=======
 
 .float-right {
   float: right;
@@ -186,4 +177,3 @@ input[type="checkbox"]:checked:before {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
->>>>>>> 61c3578 (fix everything, finish exercise)
