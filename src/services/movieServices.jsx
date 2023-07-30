@@ -10,10 +10,13 @@ export const movieServ = {
   addMovies: (formData) => {
     return https.post("/api/QuanLyPhim/ThemPhimUploadHinh", formData);
   },
+  getMovieDetails: (maPhim) => {
+    return https.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`);
+  },
   deleteMovies: (MaPhim) => {
     return https.delete(`/api/QuanLyPhim/XoaPhim?MaPhim=${MaPhim}`);
   },
-  updateMovies: (data) => {
-    return https.post("/api/QuanLyPhim/CapNhatPhimUpload", data);
+  updateMovies: (formData) => {
+    return https.post("/api/QuanLyPhim/CapNhatPhimUpload", formData);
   }
 }

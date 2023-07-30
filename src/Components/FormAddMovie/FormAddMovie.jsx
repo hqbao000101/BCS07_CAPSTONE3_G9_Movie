@@ -39,7 +39,7 @@ const FormAddMovie = () => {
         setTimeout(() => {
           navigate("/admin/movie");
           setAdd(false);
-        }, [2000]);
+        }, [1000]);
       } catch (error) {
         message.error(error.response.data);
         setAdd(false);
