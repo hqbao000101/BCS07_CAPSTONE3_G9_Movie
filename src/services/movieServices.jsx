@@ -24,4 +24,9 @@ export const movieServ = {
   updateMovies: (formData) => {
     return https.post("/api/QuanLyPhim/CapNhatPhimUpload", formData);
   },
+  getMovieShowTime: (maPhim) => {
+    return https.get(
+      `/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`
+    );
+  },
 };

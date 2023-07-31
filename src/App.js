@@ -12,6 +12,7 @@ import AddMovie from "./Components/AddMovie/AddMovie";
 import ShowTime from "./Components/ShowTime/ShowTime";
 import EditMovie from "./Components/EditMovie/EditMovie";
 import Register from "./pages/Register/Register";
+import MovieDetail from "./Components/MovieDetail/MovieDetail";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path="/detail/:id" element={<MovieDetail />} />
         </Route>
         <Route path="/admin" element={<AdminTemplate />}>
           {/* <Route path="user" element={<UserManagement />} /> */}

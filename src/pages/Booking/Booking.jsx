@@ -17,8 +17,8 @@ class Booking extends Component {
 
   render() {
     return (
-      <div className="bg-overlay py-12">
-        <div className="w-full flex justify-evenly">
+      <div className="py-12 bg-overlay bg-gradient-to-b from-white to-blue-500">
+        <div className="flex w-full justify-evenly">
           <div className="w-3/4 text-center ">
             <h3 className="mt-3 h1"> MOVIE SEAT SELECTION 🍿</h3>
             <p>
@@ -28,8 +28,8 @@ class Booking extends Component {
             <br />
             <br />
             <h5 className="pt-0">SCREEN LOCATED HERE.</h5>
-            <div className="screen mt-3"></div>
-            <div className="text-left fs-ghe ml-5 mt-2">
+            <div className="mt-3 screen"></div>
+            <div className="mt-2 ml-5 text-left fs-ghe">
               {this.renderSeatLayout()}
             </div>
             <div className="mt-3 text-left ps-12">
@@ -43,7 +43,7 @@ class Booking extends Component {
                   <span className="fs-ghe">Selected Seat</span>
                 </li>
                 <li>
-                  <button className="ghe ml-0" id="empSeat"></button>
+                  <button className="ml-0 ghe" id="empSeat"></button>
                   <span className="fs-ghe">Empty Seat</span>
                 </li>
               </ul>
