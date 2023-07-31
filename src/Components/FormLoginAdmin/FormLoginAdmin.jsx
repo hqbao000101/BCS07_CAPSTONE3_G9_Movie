@@ -22,7 +22,7 @@ const FormLoginAdmin = () => {
             messageApi.success("Login successfully");
             saveLocal("user", res.data.content);
             setTimeout(() => {
-              window.location.href = "http://localhost:3000/admin";
+              window.location.href = "/admin";
             }, [1000]);
           } else {
             messageApi.error("You are not allowed to access this page !");
