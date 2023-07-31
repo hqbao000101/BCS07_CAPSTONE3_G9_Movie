@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./slices/userSlice";
 import loadingSlice from "./slices/loadingSlice";
-import ThongTinDateVeReducer from "./reducer/ThongTinDatVeReducer"
+import ThongTinDatVeReducer from "./reducer/ThongTinDatVeReducer"
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +13,6 @@ export const store = configureStore({
     },
     user: userSlice,
     loading: loadingSlice,
+    ThongTinDatVeReducer: ThongTinDatVeReducer
   },
 });

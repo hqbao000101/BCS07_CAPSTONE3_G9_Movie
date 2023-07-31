@@ -17,10 +17,10 @@
   margin-left: 2%;
   margin-bottom: 1%;
   font-size: 30px;
-  color: yellow;
+  color: darkblue;
 }
 .firstChar {
-  color: yellow;
+  color: darkblue;
   font-size: 35px;
   margin-right: 15px;
 }
@@ -147,4 +147,33 @@ input[type="checkbox"]:checked:before {
   color: white;
   font-size: 17px;
   font-weight: 700px;
+}
+
+.float-right {
+  float: right;
+  max-width: 40%;
+  margin-left: 2rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.special-button {
+  background-color: darkblue;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 24px;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 50px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.special-button:hover {
+  background: linear-gradient(to bottom, #408BFF, #2381FF);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }

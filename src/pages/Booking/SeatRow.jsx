@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import './Style-Booking.css';
 
 class SeatRow extends Component {
   renderGhe = () => {
@@ -53,7 +54,7 @@ class SeatRow extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    danhSachGheDangDat: state.ThongTinDatVeReducer.danhSachGheDangDat
+    danhSachGheDangDat: state.ThongTinDatVeReducer.danhSachGheDangDat || []
   }
 }
 
