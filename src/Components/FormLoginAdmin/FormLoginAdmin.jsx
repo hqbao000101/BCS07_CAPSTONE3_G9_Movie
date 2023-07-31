@@ -28,7 +28,7 @@ const FormLoginAdmin = () => {
             messageApi.error("You are not allowed to access this page !");
             localStorage.removeItem("user");
             setTimeout(() => {
-              window.location.href = "http://localhost:3000";
+              window.location.href = "/";
             }, [1000]);
           }
         })
