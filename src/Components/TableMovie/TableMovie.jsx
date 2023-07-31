@@ -3,18 +3,15 @@ import { Popconfirm, Space, Table, message, Input } from "antd";
 import { movieServ } from "../../services/movieServices";
 import "./TableMovie.scss";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import removeAccents from "../../utils/formatWord";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllMovies,
-  setMovies,
   setSelectedMovie,
 } from "../../redux/slices/movieSlice";
 
 const TableMovie = () => {
   const [sortedInfo, setSortedInfo] = useState({});
-  const [initialList, setInitialList] = useState([]);
   const navigate = useNavigate();
   const allMovies = useSelector((state) => state.movie.movies);
   const dispatch = useDispatch();
@@ -26,20 +23,12 @@ const TableMovie = () => {
 
   const { Search } = Input;
   const onSearch = (value) => {
-    setInitialList(allMovies);
-    if (value !== "") {
-      let formattedValue = removeAccents(value);
-      let searchMovies = initialList.filter((item) => {
-        let formattedName = removeAccents(item.tenPhim);
-        return formattedName.includes(formattedValue);
-      });
-      dispatch(setMovies(searchMovies));
-    }
+    dispatch(getAllMovies(value));
   };
 
   const onChange = (e) => {
     if (e.target.value === "") {
-      dispatch(setMovies(initialList));
+      dispatch(getAllMovies());
     }
   };
 
