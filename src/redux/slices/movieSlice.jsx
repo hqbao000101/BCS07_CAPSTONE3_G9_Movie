@@ -3,8 +3,8 @@ import { movieServ } from "../../services/movieServices";
 
 export const getAllMovies = createAsyncThunk(
   "/movie/getAllMovies",
-  async () => {
-    const res = await movieServ.getAllMovies();
+  async (tenPhim = '') => {
+    const res = await movieServ.getAllMovies(tenPhim);
     return res.data.content;
   }
 );

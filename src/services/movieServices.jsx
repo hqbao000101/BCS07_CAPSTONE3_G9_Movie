@@ -1,10 +1,15 @@
-import { https } from "./config"
+import { https } from "./config";
 
 export const movieServ = {
   getAllBanners: () => {
     return https.get("/api/QuanLyPhim/LayDanhSachBanner");
   },
-  getAllMovies: () => {
+  getAllMovies: (tenPhim = "") => {
+    if (tenPhim.trim() !== "") {
+      return https.get(
+        `/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01&tenPhim=${tenPhim}`
+      );
+    }
     return https.get("/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01");
   },
   addMovies: (formData) => {
@@ -18,5 +23,5 @@ export const movieServ = {
   },
   updateMovies: (formData) => {
     return https.post("/api/QuanLyPhim/CapNhatPhimUpload", formData);
-  }
-}
+  },
+};
