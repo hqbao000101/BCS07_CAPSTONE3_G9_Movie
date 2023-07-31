@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { message } from "antd";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class SeatInfo extends Component {
-    handleCheckout = () => {
-        alert('Seat reserved successfully!');
-      };
-    
+  handleCheckout = () => {
+    message.success("Seat reserved successfully!");
+    setTimeout(() => {
+      window.location.href = "/";
+    }, [1000]);
+  };
+
   renderDSGheDangDat = () => {
     return this.props.danhSachGheDangDat.map((gheDangDat, index) => {
       return (
@@ -14,10 +18,10 @@ class SeatInfo extends Component {
           <td>{gheDangDat.gia}</td>
           <td>
             <button
-              className=''
+              className=""
               onClick={() => {
                 this.props.dispatch({
-                  type: 'CANCEL_SEAT',
+                  type: "CANCEL_SEAT",
                   soGhe: gheDangDat.soGhe,
                 });
               }}
@@ -33,7 +37,9 @@ class SeatInfo extends Component {
   render() {
     return (
       <>
-        <div className="mt-3 float-right"> {/* Add the float-right class */}
+        <div className="mt-3 text-right pr-5">
+          {" "}
+          {/* Add the float-right class */}
           <table className="table" border={2}>
             <thead>
               <tr>
@@ -44,23 +50,9 @@ class SeatInfo extends Component {
             </thead>
             <tbody>{this.renderDSGheDangDat()}</tbody>
           </table>
-          <button className="special-button" onClick={this.handleCheckout}>Checkout</button>
-        </div>
-        <div className="mt-3">
-          <ul className="mt-5 confirmSeat">
-            <li>
-              <button className="gheDuocChon" id="resSeat"></button>
-              <span className="fs-ghe">Reserved Seat</span>
-            </li>
-            <li>
-              <button className="gheDangChon" id="seleSeat"></button>
-              <span className="fs-ghe">Selected Seat</span>
-            </li>
-            <li>
-              <button className="ghe ml-0" id="empSeat"></button>
-              <span className="fs-ghe">Empty Seat</span>
-            </li>
-          </ul>
+          <button className="special-button mr-7" onClick={this.handleCheckout}>
+            Checkout
+          </button>
         </div>
       </>
     );

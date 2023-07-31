@@ -21,6 +21,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/booking" element={<Booking />} />
         </Route>
         <Route path="/admin" element={<AdminTemplate />}>
           {/* <Route path="user" element={<UserManagement />} /> */}
@@ -32,7 +33,6 @@ function App() {
         </Route>
         <Route path="/admin-login" element={<LoginAdmin />} />
         <Route path="*" element={<Page404 />} />
-        <Route path="/booking" element={<Booking />} />
       </Routes>
     </BrowserRouter>
   );

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { theaterServ } from "../../services/theaterServices";
 import moment from "moment/moment";
 import { NavLink } from "react-router-dom";
+import { getLocal } from "../../utils/localStore";
 
 function TabMovieItem({ maHeThongRap }) {
   const [schedule, setSchedule] = useState([]);
@@ -55,7 +56,10 @@ function TabMovieItem({ maHeThongRap }) {
                           .slice(0, 5)
                           .map((suatChieu, index) => {
                             return (
-                              <NavLink to="/booking">
+                              <NavLink
+                                to={getLocal("user") ? "/booking" : "/login"}
+                                key={index}
+                              >
                                 <p className="py-2 text-center duration-300 bg-gray-100 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-200">
                                   <span className="mr-2 font-medium text-green-600">
                                     {moment(suatChieu.ngayChieuGioChieu).format(
